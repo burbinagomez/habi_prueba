@@ -1,3 +1,6 @@
+"""
+This file containes all the configuration instances
+"""
 import os
 from sqlalchemy import create_engine
 from flask import Flask

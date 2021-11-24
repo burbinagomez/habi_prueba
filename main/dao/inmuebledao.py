@@ -32,7 +32,7 @@ def get_by_filter(**kwargs):
             )
             row_status_history = status_history_result.fetchone()
             try:
-                if status.verify_status(kwargs["status"]) and status.get_value_by_status(kwargs["status"]) == row_status_history.status_id:
+                if status.verify_status(status.get_status_by_value(row_status_history.status_id)):
                     r_inmueble = Inmueble(
                         id = row.id,
                         ciudad = row.city,
@@ -42,6 +42,17 @@ def get_by_filter(**kwargs):
                         ano_construccion = row.year,
                         status = status.get_status_by_value(row_status_history.status_id)
                     )
+                elif status.verify_status(kwargs["status"]) and status.get_value_by_status(kwargs["status"]) == row_status_history.status_id:
+                    r_inmueble = Inmueble(
+                        id = row.id,
+                        ciudad = row.city,
+                        direccion = row.address,
+                        precio = row.price,
+                        descripcion = row.description,
+                        ano_construccion = row.year,
+                        status = status.get_status_by_value(row_status_history.status_id)
+                    )
+                
                 else:
                     continue
                 inmuebles.append(r_inmueble.to_dict())

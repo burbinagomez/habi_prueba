@@ -5,7 +5,7 @@ class Status:
             "en_venta":4,
             "vendido":5,
         }
-    
+
     def verify_status(self, status):
         if status in self.status:
             return True
